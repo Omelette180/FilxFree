@@ -32,12 +32,22 @@ svg,img{display:block;flex-shrink:0}
 ::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:99px}
 ::-webkit-scrollbar-thumb:hover{background:var(--acc2)}
 
+/* LOADING SCREEN */
+#loadscreen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;transition:opacity .5s ease}
+#loadscreen.hide{opacity:0;pointer-events:none}
+.ls-logo{font-size:2.4rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,#fff 30%,var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ls-logo em{-webkit-text-fill-color:var(--acc);font-style:normal}
+.ls-count{font-size:3rem;font-weight:800;color:var(--acc);letter-spacing:-.5px;font-variant-numeric:tabular-nums;min-width:5ch;text-align:center}
+.ls-bar-wrap{width:240px;height:4px;background:var(--bg3);border-radius:99px;overflow:hidden}
+.ls-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:99px;transition:width .08s linear}
+.ls-txt{font-size:.75rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:flex;align-items:center;padding:0 1.5rem;gap:1.25rem;background:rgba(7,7,14,.93);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--bd)}
 .logo{font-size:1.18rem;font-weight:800;letter-spacing:-.5px;cursor:pointer;white-space:nowrap;flex-shrink:0;background:linear-gradient(135deg,#fff 30%,var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .logo em{-webkit-text-fill-color:var(--acc);font-style:normal}
 .nl{display:flex;gap:.1rem;list-style:none;margin-right:auto}
-.nl a{color:var(--text2);font-size:.83rem;font-weight:500;cursor:pointer;padding:.36rem .72rem;border-radius:7px;transition:all .14s;white-space:nowrap}
+.nl a{color:var(--text2);font-size:.83rem;font-weight:500;cursor:pointer;padding:.36rem .72rem;border-radius:7px;transition:all .14s;white-space:nowrap;display:block}
 .nl a:hover,.nl a.on{color:var(--text);background:var(--bg3)}
 .nr{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
 .nsw{display:flex;align-items:center;gap:.5rem;background:var(--bg3);border:1px solid var(--bd);border-radius:9px;padding:0 .7rem;height:34px;width:185px;transition:all .2s}
@@ -48,13 +58,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .nic:hover{border-color:var(--bd2);color:var(--text);background:var(--bg4)}
 .nava{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;font-size:.73rem;font-weight:700;color:#fff;cursor:pointer;border:2px solid transparent;transition:border-color .15s;flex-shrink:0;box-shadow:0 0 12px var(--acc-g)}
 .nava:hover{border-color:var(--acc)}
-
-/* PAGES */
 .page{display:none;padding-top:var(--nav);min-height:100vh;animation:fi .18s ease}
 .page.on{display:block}
 @keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
-
-/* HERO */
 .hero{position:relative;min-height:520px;display:flex;align-items:flex-end;padding:3rem 1.75rem 2.5rem;overflow:hidden}
 .hbg{position:absolute;inset:0;z-index:0;background:var(--bg)}
 .hbgimg{position:absolute;inset:0;background-size:cover;background-position:center top;opacity:0;transition:opacity .6s}
@@ -66,8 +72,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .hero h1{font-size:clamp(1.85rem,3.5vw,2.8rem);font-weight:800;line-height:1.12;letter-spacing:-.8px;margin-bottom:.8rem}
 .hero p{color:var(--text2);font-size:.88rem;line-height:1.7;margin-bottom:1.6rem;max-width:420px}
 .hbtns{display:flex;gap:.5rem;flex-wrap:wrap}
-
-/* BUTTONS */
 .btn{border-radius:8px;padding:.52rem 1.1rem;font-weight:600;font-size:.83rem;cursor:pointer;border:none;transition:all .15s;display:inline-flex;align-items:center;gap:.4rem;letter-spacing:.01em}
 .btn-p{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 4px 14px var(--acc-g)}
 .btn-p:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 6px 20px var(--acc-g)}
@@ -77,8 +81,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .btn-d:hover{background:rgba(239,68,68,.18)}
 .btn-sm{padding:.35rem .82rem;font-size:.77rem;border-radius:7px}
 .btn-fw{width:100%;justify-content:center}
-
-/* SECTIONS */
 .sec{padding:1.6rem 1.75rem}
 .sec+.sec{padding-top:.15rem}
 .sech{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
@@ -87,17 +89,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .sa{font-size:.76rem;color:var(--acc);cursor:pointer;font-weight:500;display:flex;align-items:center;gap:2px;transition:opacity .13s}
 .sa:hover{opacity:.75}
 .divider{border:none;border-top:1px solid var(--bd);margin:0}
-
-/* PILLS */
 .pills{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1.2rem}
 .pill{background:var(--bg3);border:1px solid var(--bd);border-radius:99px;padding:4px 14px;font-size:.76rem;font-weight:500;cursor:pointer;color:var(--text2);transition:all .13s;white-space:nowrap}
 .pill:hover{border-color:var(--bd2);color:var(--text)}
 .pill.on{background:var(--acc3);border-color:var(--acc-b);color:var(--acc)}
-
-/* GRID */
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:.75rem}
-
-/* CARD */
 .card{cursor:pointer;border-radius:var(--r);overflow:hidden;background:var(--card);border:1px solid var(--bd);position:relative;transition:transform .16s,box-shadow .16s,border-color .16s;contain:layout style}
 .card:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 12px 32px rgba(0,0,0,.5);border-color:var(--acc-b)}
 .card:hover .cplay{opacity:1;transform:translate(-50%,-50%) scale(1)}
@@ -115,15 +111,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .ct{font-size:.79rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;color:var(--text)}
 .cs{font-size:.68rem;color:var(--text2);display:flex;gap:4px;align-items:center}
 .cstar{color:#f5c518;font-size:.72rem}
-
-/* SKELETON */
 .skel{border-radius:var(--r);background:var(--card);border:1px solid var(--bd);overflow:hidden}
 .skel-img{aspect-ratio:2/3;animation:bk 1.6s ease infinite;background:var(--bg3)}
 .skel-b{height:9px;background:var(--bg3);border-radius:4px;margin:.55rem .65rem .3rem;animation:bk 1.6s .1s ease infinite}
 .skel-b2{height:7px;width:55%;background:var(--bg3);border-radius:4px;margin:0 .65rem .65rem;animation:bk 1.6s .2s ease infinite}
 @keyframes bk{0%,100%{opacity:.35}50%{opacity:.65}}
-
-/* PLAYER */
 .pwrap{max-width:1100px;margin:0 auto;padding:1.4rem 1.75rem 4rem}
 .backbtn{display:inline-flex;align-items:center;gap:6px;color:var(--text2);font-size:.82rem;cursor:pointer;margin-bottom:1rem;padding:.3rem .6rem .3rem 0;border:none;background:none;transition:color .13s}
 .backbtn:hover{color:var(--text)}
@@ -142,8 +134,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .mdot{color:var(--text3)}
 .pover{margin-top:.8rem;font-size:.87rem;color:var(--text2);line-height:1.72;max-width:720px}
 .pacts{display:flex;gap:.45rem;margin-top:1.1rem;flex-wrap:wrap}
-
-/* EPISODES — Cineby style */
 .epsec{margin-top:1.75rem}
 .epsect{font-size:.9rem;font-weight:700;margin-bottom:.7rem;display:flex;align-items:center;gap:.4rem}
 .stabs{display:flex;gap:.3rem;flex-wrap:wrap;margin-bottom:1rem}
@@ -170,8 +160,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .epbtn{background:var(--bg3);border:1px solid var(--bd);color:var(--text2);border-radius:6px;padding:4px 12px;font-size:.76rem;cursor:pointer;transition:all .12s}
 .epbtn:hover{border-color:var(--bd2);color:var(--text)}
 .epbtn.on{background:var(--acc3);border-color:var(--acc-b);color:var(--acc)}
-
-/* SEARCH */
 .swrap{padding:1.75rem 1.75rem 0}
 .sbar{display:flex;align-items:center;gap:.65rem;background:var(--bg3);border:1px solid var(--bd);border-radius:12px;padding:0 1rem;height:50px;max-width:580px;transition:all .2s}
 .sbar:focus-within{border-color:var(--acc);box-shadow:0 0 0 3px var(--acc3)}
@@ -180,19 +168,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .sbar button{background:var(--acc);border:none;border-radius:7px;color:#fff;font-size:.77rem;font-weight:600;padding:.38rem .9rem;cursor:pointer;transition:opacity .13s}
 .sbar button:hover{opacity:.85}
 .sinfo{font-size:.82rem;color:var(--text2);padding:.65rem 0 1.1rem}
-
-/* BROWSE */
 .bhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.2rem;flex-wrap:wrap;gap:.6rem}
 .ttabs{display:flex;gap:.25rem;background:var(--bg3);border:1px solid var(--bd);border-radius:9px;padding:3px}
 .ttab{background:transparent;border:none;color:var(--text2);border-radius:7px;padding:.32rem .9rem;font-size:.8rem;font-weight:500;cursor:pointer;transition:all .13s}
 .ttab.on{background:var(--bg5);color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.3)}
 .lwrap{text-align:center;margin-top:1.75rem}
-
-/* SPINNER */
 .spin{width:22px;height:22px;border:2.5px solid var(--bd2);border-top-color:var(--acc);border-radius:50%;animation:rot .65s linear infinite}
 @keyframes rot{to{transform:rotate(360deg)}}
-
-/* PROFILE */
 .prwrap{max-width:640px;margin:0 auto;padding:2rem 1.75rem 3rem}
 .prhdr{display:flex;align-items:center;gap:1.25rem;margin-bottom:2rem}
 .pravatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--acc),var(--acc2));display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:#fff;flex-shrink:0;box-shadow:0 0 24px var(--acc-g)}
@@ -209,12 +191,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .hinfo{flex:1;min-width:0}
 .htitle{font-size:.83rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hsub{font-size:.7rem;color:var(--text2);margin-top:2px}
-.hrm{color:var(--text3);cursor:pointer;padding:4px;border-radius:5px;transition:color .13s;flex-shrink:0}
+.hrm{color:var(--text3);cursor:pointer;padding:4px;border-radius:5px;transition:color .13s;flex-shrink:0;background:none;border:none}
 .hrm:hover{color:#f87171}
 .empty{text-align:center;padding:3.5rem 1rem;color:var(--text3)}
 .empty p{font-size:.88rem;margin-top:.6rem;line-height:1.6}
-
-/* SETTINGS */
 .setwrap{max-width:620px;margin:0 auto;padding:2rem 1.75rem 3rem}
 .settitle{font-size:1.2rem;font-weight:800;letter-spacing:-.4px;margin-bottom:2rem}
 .setg{margin-bottom:2rem}
@@ -228,21 +208,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .setd{font-size:.73rem;color:var(--text2);margin-top:2px}
 .setsel{background:var(--bg3);border:1px solid var(--bd2);color:var(--text);font-size:.81rem;border-radius:7px;padding:.3rem .6rem;outline:none;cursor:pointer}
 .setsel:focus{border-color:var(--acc)}
-/* theme swatches */
 .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:.45rem;margin-top:.5rem}
 .tsw{padding:.55rem;border-radius:8px;border:2px solid var(--bd);cursor:pointer;transition:all .13s;text-align:center;font-size:.68rem;font-weight:500;color:var(--text2);background:var(--bg3)}
 .tsw:hover{border-color:var(--bd2)}
 .tsw.on{border-color:var(--acc);color:var(--acc)}
 .tdot{width:24px;height:24px;border-radius:50%;margin:0 auto .4rem;border:2px solid rgba(255,255,255,.1)}
-/* toggle */
 .tog{position:relative;width:40px;height:22px;flex-shrink:0}
 .tog input{opacity:0;width:0;height:0;position:absolute}
 .togtr{position:absolute;inset:0;background:var(--bg5);border-radius:99px;cursor:pointer;transition:background .2s;border:1px solid var(--bd2)}
 .tog input:checked+.togtr{background:var(--acc);border-color:var(--acc)}
 .togtm{position:absolute;top:3px;left:3px;width:14px;height:14px;background:#fff;border-radius:50%;transition:transform .2s;pointer-events:none}
 .tog input:checked~.togtm{transform:translateX(18px)}
-
-/* MODAL */
 .overlay{position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.75);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .2s}
 .overlay.on{opacity:1;pointer-events:all}
 .modal{background:var(--bg2);border:1px solid var(--bd2);border-radius:var(--r3);padding:2rem;width:100%;max-width:380px;position:relative;box-shadow:0 24px 80px rgba(0,0,0,.7);animation:ms .22s ease}
@@ -262,8 +238,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 .fdiv{text-align:center;font-size:.75rem;color:var(--text3);margin:.9rem 0;position:relative}
 .fdiv::before,.fdiv::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--bd)}
 .fdiv::before{left:0}.fdiv::after{right:0}
-
-/* RESPONSIVE */
 @media(max-width:640px){
   nav{padding:0 .9rem;gap:.85rem}
   .nl{display:none}
@@ -282,20 +256,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 </head>
 <body>
 
+<!-- LOADING SCREEN -->
+<div id="loadscreen">
+  <div class="ls-logo">Flix<em>Free</em></div>
+  <div class="ls-count" id="lscount">0%</div>
+  <div class="ls-bar-wrap"><div class="ls-bar" id="lsbar"></div></div>
+  <div class="ls-txt">Loading your stream…</div>
+</div>
+
 <nav>
-  <span class="logo" onclick="go('home')">Flix<em>Free</em></span>
+  <span class="logo" id="navlogo">Flix<em>Free</em></span>
   <ul class="nl">
-    <li><a id="nla" class="on" onclick="go('home');hl(this)">Home</a></li>
-    <li><a id="nlb" onclick="go('browse','movie');hl(this)">Movies</a></li>
-    <li><a id="nlc" onclick="go('browse','tv');hl(this)">TV Shows</a></li>
-    <li><a id="nld" onclick="go('search');hl(this)">Search</a></li>
+    <li><a id="nla" class="on">Home</a></li>
+    <li><a id="nlb">Movies</a></li>
+    <li><a id="nlc">TV Shows</a></li>
+    <li><a id="nld">Search</a></li>
   </ul>
   <div class="nr">
     <div class="nsw">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="nsi" placeholder="Quick search…" onkeydown="if(event.key==='Enter')qsearch()">
+      <input id="nsi" placeholder="Quick search…">
     </div>
-    <button class="nic" title="Settings" onclick="go('settings')">
+    <button class="nic" id="nbset" title="Settings">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
     </button>
     <div id="navu"></div>
@@ -311,9 +293,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
       <h1>Watch anything.<br>Instantly.</h1>
       <p>Stream thousands of movies and shows for free — no subscription, no limits.</p>
       <div class="hbtns">
-        <button class="btn btn-p" onclick="go('browse','movie')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>Browse Movies</button>
-        <button class="btn btn-g" onclick="go('browse','tv')">TV Shows</button>
-        <button class="btn btn-g" onclick="go('search')">Search</button>
+        <button class="btn btn-p" id="hbrowsemov"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>Browse Movies</button>
+        <button class="btn btn-g" id="hbrowsetv">TV Shows</button>
+        <button class="btn btn-g" id="hbsearch">Search</button>
       </div>
     </div>
   </div>
@@ -326,7 +308,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
   <div class="sec">
     <div class="sech">
       <span class="sect"><span class="dot"></span>Trending Movies</span>
-      <span class="sa" onclick="go('browse','movie')">See all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></span>
+      <span class="sa" id="seeallmov">See all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></span>
     </div>
     <div class="grid" id="hm"></div>
   </div>
@@ -334,7 +316,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
   <div class="sec">
     <div class="sech">
       <span class="sect"><span class="dot"></span>Trending TV Shows</span>
-      <span class="sa" onclick="go('browse','tv')">See all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></span>
+      <span class="sa" id="seealltv">See all <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg></span>
     </div>
     <div class="grid" id="ht"></div>
   </div>
@@ -346,13 +328,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
     <div class="bhead">
       <h2 id="brh" style="font-size:1.1rem;font-weight:800;letter-spacing:-.3px">Movies</h2>
       <div class="ttabs">
-        <button class="ttab on" id="ttm" onclick="stype('movie')">Movies</button>
-        <button class="ttab" id="ttt" onclick="stype('tv')">TV Shows</button>
+        <button class="ttab on" id="ttm">Movies</button>
+        <button class="ttab" id="ttt">TV Shows</button>
       </div>
     </div>
     <div class="pills" id="gpills"></div>
     <div class="grid" id="brgrid"></div>
-    <div class="lwrap"><button class="btn btn-g" id="lmb" style="display:none;margin:0 auto" onclick="lmore()">Load more</button></div>
+    <div class="lwrap"><button class="btn btn-g" id="lmb" style="display:none;margin:0 auto">Load more</button></div>
   </div>
 </div>
 
@@ -361,8 +343,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
   <div class="swrap">
     <div class="sbar">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      <input id="si" placeholder="Search movies, shows, actors…" oninput="dsearch(this.value)" onkeydown="if(event.key==='Enter')dosearch(this.value)">
-      <button onclick="dosearch(document.getElementById('si').value)">Search</button>
+      <input id="si" placeholder="Search movies, shows, actors…">
+      <button id="srchbtn">Search</button>
     </div>
     <p class="sinfo" id="sinf">Start typing to search…</p>
   </div>
@@ -372,13 +354,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 <!-- PLAYER -->
 <div class="page" id="player-page">
   <div class="pwrap">
-    <button class="backbtn" onclick="goback()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back</button>
+    <button class="backbtn" id="backbtn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>Back</button>
     <div class="srrow">
       <span class="srlabel">SERVER</span>
-      <button class="srbtn on" id="sb0" onclick="ssrv(0)">VidSrc</button>
-      <button class="srbtn" id="sb1" onclick="ssrv(1)">VidSrc Pro</button>
-      <button class="srbtn" id="sb2" onclick="ssrv(2)">EmbedSU</button>
-      <button class="srbtn" id="sb3" onclick="ssrv(3)">2Embed</button>
+      <button class="srbtn on" id="sb0">VidSrc</button>
+      <button class="srbtn" id="sb1">VidSrc Pro</button>
+      <button class="srbtn" id="sb2">EmbedSU</button>
+      <button class="srbtn" id="sb3">2Embed</button>
     </div>
     <p class="srwarn">If one server doesn't work, try another — they carry different titles.</p>
     <div class="pbox">
@@ -402,8 +384,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
         <div class="prname" id="pname">Guest</div>
         <div class="premail" id="pemail">Not signed in</div>
         <div style="display:flex;gap:.4rem;margin-top:.7rem">
-          <button class="btn btn-p btn-sm" id="prsignin" onclick="openM('login')">Sign in</button>
-          <button class="btn btn-g btn-sm" id="prsignout" style="display:none" onclick="logout()">Sign out</button>
+          <button class="btn btn-p btn-sm" id="prsignin">Sign in</button>
+          <button class="btn btn-g btn-sm" id="prsignout" style="display:none">Sign out</button>
         </div>
       </div>
     </div>
@@ -414,7 +396,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
     </div>
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem">
       <span style="font-size:.9rem;font-weight:700">Watch History</span>
-      <button class="btn btn-d btn-sm" id="clrbtn" style="display:none" onclick="clrhist()">Clear all</button>
+      <button class="btn btn-d btn-sm" id="clrbtn" style="display:none">Clear all</button>
     </div>
     <div id="hlist"></div>
   </div>
@@ -428,20 +410,20 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
       <div class="setgl">Account</div>
       <div class="setr" id="setacct">
         <div><div class="setl">Not signed in</div><div class="setd">Sign in to save history</div></div>
-        <button class="btn btn-p btn-sm" onclick="openM('login')">Sign in</button>
+        <button class="btn btn-p btn-sm" id="setSignin">Sign in</button>
       </div>
     </div>
     <div class="setg">
       <div class="setgl">Appearance</div>
       <div class="setr" style="flex-direction:column;align-items:flex-start;gap:.7rem">
         <div><div class="setl">Theme</div><div class="setd">Pick your vibe</div></div>
-        <div class="tgrid" id="tgrid">
-          <div class="tsw on" data-t="" onclick="setTheme(this)"><div class="tdot" style="background:linear-gradient(135deg,#9d7cff,#5a3dc8)"></div>Purple</div>
-          <div class="tsw" data-t="midnight" onclick="setTheme(this)"><div class="tdot" style="background:linear-gradient(135deg,#b38bff,#6600cc)"></div>Midnight</div>
-          <div class="tsw" data-t="violet" onclick="setTheme(this)"><div class="tdot" style="background:linear-gradient(135deg,#aa77ff,#440088)"></div>Violet</div>
-          <div class="tsw" data-t="rose" onclick="setTheme(this)"><div class="tdot" style="background:linear-gradient(135deg,#e066cc,#880066)"></div>Rose</div>
-          <div class="tsw" data-t="ocean" onclick="setTheme(this)"><div class="tdot" style="background:linear-gradient(135deg,#3db8f5,#0055aa)"></div>Ocean</div>
-          <div class="tsw" data-t="light" onclick="setTheme(this)"><div class="tdot" style="background:linear-gradient(135deg,#e0e0f0,#9090c0)"></div>Light</div>
+        <div class="tgrid">
+          <div class="tsw on" data-t=""><div class="tdot" style="background:linear-gradient(135deg,#9d7cff,#5a3dc8)"></div>Purple</div>
+          <div class="tsw" data-t="midnight"><div class="tdot" style="background:linear-gradient(135deg,#b38bff,#6600cc)"></div>Midnight</div>
+          <div class="tsw" data-t="violet"><div class="tdot" style="background:linear-gradient(135deg,#aa77ff,#440088)"></div>Violet</div>
+          <div class="tsw" data-t="rose"><div class="tdot" style="background:linear-gradient(135deg,#e066cc,#880066)"></div>Rose</div>
+          <div class="tsw" data-t="ocean"><div class="tdot" style="background:linear-gradient(135deg,#3db8f5,#0055aa)"></div>Ocean</div>
+          <div class="tsw" data-t="light"><div class="tdot" style="background:linear-gradient(135deg,#e0e0f0,#9090c0)"></div>Light</div>
         </div>
       </div>
     </div>
@@ -449,31 +431,31 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
       <div class="setgl">Playback</div>
       <div class="setr">
         <div><div class="setl">Default server</div><div class="setd">Used when you open a title</div></div>
-        <select class="setsel" id="setsrv" onchange="saveS('server',this.value)">
+        <select class="setsel" id="setsrv">
           <option value="0">VidSrc</option><option value="1">VidSrc Pro</option>
           <option value="2">EmbedSU</option><option value="3">2Embed</option>
         </select>
       </div>
       <div class="setr">
         <div><div class="setl">Autoplay</div><div class="setd">Start playing on load</div></div>
-        <label class="tog"><input type="checkbox" id="setap" onchange="saveS('autoplay',this.checked)"><div class="togtr"></div><div class="togtm"></div></label>
+        <label class="tog"><input type="checkbox" id="setap"><div class="togtr"></div><div class="togtm"></div></label>
       </div>
     </div>
     <div class="setg">
       <div class="setgl">Privacy</div>
       <div class="setr">
         <div><div class="setl">Save watch history</div><div class="setd">Track what you've watched</div></div>
-        <label class="tog"><input type="checkbox" id="seth" onchange="saveS('history',this.checked)"><div class="togtr"></div><div class="togtm"></div></label>
+        <label class="tog"><input type="checkbox" id="seth"><div class="togtr"></div><div class="togtm"></div></label>
       </div>
       <div class="setr">
         <div><div class="setl">Clear history</div><div class="setd">Permanently delete all watched titles</div></div>
-        <button class="btn btn-d btn-sm" onclick="clrhist()">Clear</button>
+        <button class="btn btn-d btn-sm" id="setClrHist">Clear</button>
       </div>
     </div>
     <div class="setg">
       <div class="setgl">About</div>
       <div class="setr">
-        <div><div class="setl">FlixFree</div><div class="setd">v3.0 · Powered by TMDB · Free forever</div></div>
+        <div><div class="setl">FlixFree</div><div class="setd">v3.1 · Powered by TMDB · Free forever</div></div>
         <span style="font-size:.72rem;color:var(--acc);font-weight:600">FREE</span>
       </div>
     </div>
@@ -481,163 +463,311 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 </div>
 
 <!-- AUTH MODAL -->
-<div class="overlay" id="amod" onclick="if(event.target===this)closeM()">
+<div class="overlay" id="amod">
   <div class="modal">
-    <button class="mclose" onclick="closeM()"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    <button class="mclose" id="mcloseBtn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     <div class="mtitle">Welcome to FlixFree</div>
     <div class="msub">Sign in to save your watch history</div>
     <div class="mtabs">
-      <button class="mtab on" id="mta" onclick="switchT('login')">Sign in</button>
-      <button class="mtab" id="mtb" onclick="switchT('reg')">Create account</button>
+      <button class="mtab on" id="mta">Sign in</button>
+      <button class="mtab" id="mtb">Create account</button>
     </div>
     <div id="lf">
       <div class="fg"><label class="fl">Email</label><input class="fi" id="le" type="email" placeholder="you@example.com"></div>
-      <div class="fg"><label class="fl">Password</label><input class="fi" id="lp" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')dologin()"></div>
+      <div class="fg"><label class="fl">Password</label><input class="fi" id="lp" type="password" placeholder="Password"></div>
       <div class="ferr" id="lerr"></div>
-      <button class="btn btn-p btn-fw" onclick="dologin()">Sign in</button>
+      <button class="btn btn-p btn-fw" id="dologinBtn">Sign in</button>
       <div class="fdiv">or</div>
-      <button class="btn btn-g btn-fw" onclick="closeM()">Continue as guest</button>
+      <button class="btn btn-g btn-fw" id="guestBtn">Continue as guest</button>
     </div>
     <div id="rf" style="display:none">
       <div class="fg"><label class="fl">Name</label><input class="fi" id="rn" type="text" placeholder="Your name"></div>
       <div class="fg"><label class="fl">Email</label><input class="fi" id="re" type="email" placeholder="you@example.com"></div>
-      <div class="fg"><label class="fl">Password</label><input class="fi" id="rp" type="password" placeholder="At least 6 characters" onkeydown="if(event.key==='Enter')doreg()"></div>
+      <div class="fg"><label class="fl">Password</label><input class="fi" id="rp" type="password" placeholder="At least 6 characters"></div>
       <div class="ferr" id="rerr"></div>
-      <button class="btn btn-p btn-fw" onclick="doreg()">Create account</button>
+      <button class="btn btn-p btn-fw" id="doregBtn">Create account</button>
       <div class="fdiv">or</div>
-      <button class="btn btn-g btn-fw" onclick="closeM()">Continue as guest</button>
+      <button class="btn btn-g btn-fw" id="guestBtn2">Continue as guest</button>
     </div>
   </div>
 </div>
 
 <script>
 'use strict';
-const KEY='4ef0d7355d9ffb5151e987764708ce96',API='https://api.themoviedb.org/3',IW='https://image.tmdb.org/t/p/w300',IB='https://image.tmdb.org/t/p/w780',IE='https://image.tmdb.org/t/p/w500';
-const LS={g:k=>{try{return JSON.parse(localStorage.getItem(k))}catch{return null}},s:(k,v)=>localStorage.setItem(k,JSON.stringify(v)),d:k=>localStorage.removeItem(k)};
+
+// ═══════════════════════════════════════════════
+//  AD BLOCK — popup & redirect killer
+// ═══════════════════════════════════════════════
+window.open = () => null;
+window.alert = () => null;
+window.confirm = () => false;
+window.prompt = () => null;
+window.addEventListener('beforeunload', e => e.stopImmediatePropagation(), true);
+window.addEventListener('message', e => {
+  if (typeof e.data === 'string') {
+    try { const d=JSON.parse(e.data); if(d.type==='navigate'||d.action==='redirect'||d.url) e.stopImmediatePropagation(); } catch(_){}
+  }
+}, true);
+new MutationObserver(muts => {
+  muts.forEach(m => m.addedNodes.forEach(node => {
+    if (node.nodeType !== 1) return;
+    const s = window.getComputedStyle(node);
+    if ((s.position==='fixed'||s.position==='absolute') && parseInt(s.zIndex)>500
+        && !node.closest('nav,.modal,.overlay,#amod,#loadscreen,.pbox')) node.remove();
+  }));
+}).observe(document.body, {childList:true, subtree:true});
+document.addEventListener('click', e => { if(e.target.tagName==='IFRAME') e.preventDefault(); }, true);
+
+// ═══════════════════════════════════════════════
+//  COUNTING LOADING SCREEN
+// ═══════════════════════════════════════════════
+(function(){
+  const bar = document.getElementById('lsbar');
+  const count = document.getElementById('lscount');
+  const screen = document.getElementById('loadscreen');
+  let p = 0;
+  const tick = () => {
+    p += Math.random() * 7 + 3;
+    if (p >= 100) {
+      p = 100;
+      bar.style.width = '100%';
+      count.textContent = '100%';
+      setTimeout(() => {
+        screen.classList.add('hide');
+        setTimeout(() => screen.remove(), 500);
+      }, 250);
+      return;
+    }
+    bar.style.width = p + '%';
+    count.textContent = Math.floor(p) + '%';
+    setTimeout(tick, 60 + Math.random() * 60);
+  };
+  tick();
+})();
+
+// ═══════════════════════════════════════════════
+//  CORE
+// ═══════════════════════════════════════════════
+const KEY='4ef0d7355d9ffb5151e987764708ce96', API='https://api.themoviedb.org/3';
+const IW='https://image.tmdb.org/t/p/w300', IB='https://image.tmdb.org/t/p/w780', IE='https://image.tmdb.org/t/p/w500';
+const LS = {
+  g: k => { try { return JSON.parse(localStorage.getItem(k)); } catch { return null; } },
+  s: (k,v) => localStorage.setItem(k, JSON.stringify(v)),
+  d: k => localStorage.removeItem(k)
+};
 
 // THEME
-function setTheme(el){const t=el.dataset.t||'';document.documentElement.dataset.theme=t;LS.s('ff_theme',t);document.querySelectorAll('.tsw').forEach(s=>s.classList.toggle('on',(s.dataset.t||'')===t))}
-(()=>{const t=LS.g('ff_theme')||'';document.documentElement.dataset.theme=t;document.querySelectorAll('.tsw').forEach(s=>s.classList.toggle('on',(s.dataset.t||'')===t))})();
+function setTheme(t) {
+  document.documentElement.dataset.theme = t;
+  LS.s('ff_theme', t);
+  document.querySelectorAll('.tsw').forEach(s => s.classList.toggle('on', (s.dataset.t||'') === t));
+}
+(()=>{
+  const t = LS.g('ff_theme') || '';
+  document.documentElement.dataset.theme = t;
+  document.querySelectorAll('.tsw').forEach(s => s.classList.toggle('on', (s.dataset.t||'') === t));
+})();
+document.querySelectorAll('.tsw').forEach(sw => sw.addEventListener('click', () => setTheme(sw.dataset.t||'')));
 
 // AUTH
-let CU=LS.g('ff_user');
-const gUsers=()=>LS.g('ff_users')||[];
-const sUsers=u=>LS.s('ff_users',u);
+let CU = LS.g('ff_user');
+const gUsers = () => LS.g('ff_users') || [];
+const sUsers = u => LS.s('ff_users', u);
 
-function dologin(){
-  const e=document.getElementById('le').value.trim(),p=document.getElementById('lp').value,err=document.getElementById('lerr');
-  err.textContent='';
-  if(!e||!p){err.textContent='Please fill in all fields.';return}
-  const u=gUsers().find(u=>u.email===e&&u.password===btoa(p));
-  if(!u){err.textContent='Incorrect email or password.';return}
-  CU=u;LS.s('ff_user',u);closeM();afterAuth();
+function dologin() {
+  const e=document.getElementById('le').value.trim(), p=document.getElementById('lp').value;
+  const err=document.getElementById('lerr'); err.textContent='';
+  if (!e||!p) { err.textContent='Please fill in all fields.'; return; }
+  const u = gUsers().find(u => u.email===e && u.password===btoa(p));
+  if (!u) { err.textContent='Incorrect email or password.'; return; }
+  CU=u; LS.s('ff_user',u); closeM(); afterAuth();
 }
-function doreg(){
-  const n=document.getElementById('rn').value.trim(),e=document.getElementById('re').value.trim(),p=document.getElementById('rp').value,err=document.getElementById('rerr');
-  err.textContent='';
-  if(!n||!e||!p){err.textContent='Please fill in all fields.';return}
-  if(p.length<6){err.textContent='Password must be at least 6 characters.';return}
+function doreg() {
+  const n=document.getElementById('rn').value.trim(), e=document.getElementById('re').value.trim(), p=document.getElementById('rp').value;
+  const err=document.getElementById('rerr'); err.textContent='';
+  if (!n||!e||!p) { err.textContent='Please fill in all fields.'; return; }
+  if (p.length<6) { err.textContent='Password must be at least 6 characters.'; return; }
   const us=gUsers();
-  if(us.find(u=>u.email===e)){err.textContent='Account already exists.';return}
+  if (us.find(u=>u.email===e)) { err.textContent='Account already exists.'; return; }
   const u={id:Date.now(),name:n,email:e,password:btoa(p)};
-  us.push(u);sUsers(us);CU=u;LS.s('ff_user',u);closeM();afterAuth();
+  us.push(u); sUsers(us); CU=u; LS.s('ff_user',u); closeM(); afterAuth();
 }
-function logout(){CU=null;LS.d('ff_user');rnav();rsetacct();rprofile();go('home')}
-function afterAuth(){rnav();rsetacct();rprofile();rcont()}
+function logout() { CU=null; LS.d('ff_user'); rnav(); rsetacct(); rprofile(); go('home'); }
+function afterAuth() { rnav(); rsetacct(); rprofile(); rcont(); }
 
 // SETTINGS
-const gS=(k,d)=>{const s=LS.g('ff_settings')||{};return s[k]!==undefined?s[k]:d};
-const saveS=(k,v)=>{const s=LS.g('ff_settings')||{};s[k]=v;LS.s('ff_settings',s)};
-function lsettings(){
-  document.getElementById('setsrv').value=gS('server','0');
-  document.getElementById('setap').checked=gS('autoplay',true);
-  document.getElementById('seth').checked=gS('history',true);
+const gS = (k,d) => { const s=LS.g('ff_settings')||{}; return s[k]!==undefined?s[k]:d; };
+const saveS = (k,v) => { const s=LS.g('ff_settings')||{}; s[k]=v; LS.s('ff_settings',s); };
+function lsettings() {
+  document.getElementById('setsrv').value = gS('server','0');
+  document.getElementById('setap').checked = gS('autoplay',true);
+  document.getElementById('seth').checked = gS('history',true);
   const t=LS.g('ff_theme')||'';
   document.querySelectorAll('.tsw').forEach(s=>s.classList.toggle('on',(s.dataset.t||'')===t));
 }
+document.getElementById('setsrv').addEventListener('change', function(){ saveS('server',this.value); });
+document.getElementById('setap').addEventListener('change', function(){ saveS('autoplay',this.checked); });
+document.getElementById('seth').addEventListener('change', function(){ saveS('history',this.checked); });
 
 // HISTORY
-const hk=()=>CU?`ff_hist_${CU.id}`:'ff_hist_guest';
-const gH=()=>LS.g(hk())||[];
-const sH=h=>LS.s(hk(),h);
-function addH(item,type){if(!gS('history',true))return;const h=gH().filter(x=>!(x.id===item.id&&x.type===type));h.unshift({id:item.id,type,title:item.title||item.name,poster:item.poster_path,date:Date.now()});sH(h.slice(0,100))}
-function rmH(id,type){sH(gH().filter(x=>!(x.id===id&&x.type===type)));rprofile();rcont()}
-function clrhist(){LS.d(hk());rprofile();rcont()}
+const hk = () => CU ? `ff_hist_${CU.id}` : 'ff_hist_guest';
+const gH = () => LS.g(hk()) || [];
+const sH = h => LS.s(hk(), h);
+function addH(item,type) {
+  if (!gS('history',true)) return;
+  const h=gH().filter(x=>!(x.id===item.id&&x.type===type));
+  h.unshift({id:item.id,type,title:item.title||item.name,poster:item.poster_path,date:Date.now()});
+  sH(h.slice(0,100));
+}
+function rmH(id,type) { sH(gH().filter(x=>!(x.id===id&&x.type===type))); rprofile(); rcont(); }
+function clrhist() { LS.d(hk()); rprofile(); rcont(); }
 
 // API
-const cache=new Map();
-async function api(url){if(cache.has(url))return cache.get(url);try{const r=await fetch(url);if(!r.ok)return{};const j=await r.json();cache.set(url,j);return j}catch{return{}}}
+const cache = new Map();
+async function api(url) {
+  if (cache.has(url)) return cache.get(url);
+  try { const r=await fetch(url); if(!r.ok) return {}; const j=await r.json(); cache.set(url,j); return j; } catch { return {}; }
+}
 
 // LAZY IMG
-const iobs=new IntersectionObserver(ents=>{ents.forEach(e=>{if(!e.isIntersecting)return;const w=e.target;iobs.unobserve(w);const img=w.querySelector('.poster');if(!img)return;img.src=w.dataset.src;img.onload=()=>{img.classList.add('vis');w.classList.add('ok')};img.onerror=()=>w.classList.add('ok')})},{rootMargin:'240px'});
+const iobs = new IntersectionObserver(ents => {
+  ents.forEach(e => {
+    if (!e.isIntersecting) return;
+    const w=e.target; iobs.unobserve(w);
+    const img=w.querySelector('.poster'); if(!img) return;
+    img.src=w.dataset.src;
+    img.onload=()=>{ img.classList.add('vis'); w.classList.add('ok'); };
+    img.onerror=()=>w.classList.add('ok');
+  });
+},{rootMargin:'240px'});
 
-// EMBED URLS — FIX: no sandbox attribute needed, use reliable sources
-function eurl(item,type,srv,s,ep){
+// EMBED URLS
+function eurl(item,type,srv,s,ep) {
   const id=item.id;
-  if(type==='movie'){
-    if(srv===0)return`https://vidsrc.to/embed/movie/${id}`;
-    if(srv===1)return`https://vidsrc.me/embed/movie?tmdb=${id}`;
-    if(srv===2)return`https://embed.su/embed/movie/${id}`;
-    return`https://www.2embed.cc/embed/${id}`;
+  if (type==='movie') {
+    if(srv===0) return `https://vidsrc.to/embed/movie/${id}`;
+    if(srv===1) return `https://vidsrc.me/embed/movie?tmdb=${id}`;
+    if(srv===2) return `https://embed.su/embed/movie/${id}`;
+    return `https://www.2embed.cc/embed/${id}`;
   }
-  if(srv===0)return`https://vidsrc.to/embed/tv/${id}/${s}/${ep}`;
-  if(srv===1)return`https://vidsrc.me/embed/tv?tmdb=${id}&season=${s}&episode=${ep}`;
-  if(srv===2)return`https://embed.su/embed/tv/${id}/${s}/${ep}`;
-  return`https://www.2embed.cc/embedtv/${id}&s=${s}&e=${ep}`;
+  if(srv===0) return `https://vidsrc.to/embed/tv/${id}/${s}/${ep}`;
+  if(srv===1) return `https://vidsrc.me/embed/tv?tmdb=${id}&season=${s}&episode=${ep}`;
+  if(srv===2) return `https://embed.su/embed/tv/${id}/${s}/${ep}`;
+  return `https://www.2embed.cc/embedtv/${id}&s=${s}&e=${ep}`;
 }
 
 // STATE
-let cType='movie',cPage=1,cGenre='',prevP='home';
-let cItem=null,cMT='movie',cS=1,cEp=1,cSrv=0,stmr=null,hldd=false;
-const GENRES={
+let cType='movie', cPage=1, cGenre='', prevP='home';
+let cItem=null, cMT='movie', cS=1, cEp=1, cSrv=0, stmr=null, hldd=false;
+const GENRES = {
   movie:[{id:'',n:'All'},{id:28,n:'Action'},{id:12,n:'Adventure'},{id:16,n:'Animation'},{id:35,n:'Comedy'},{id:80,n:'Crime'},{id:18,n:'Drama'},{id:27,n:'Horror'},{id:9648,n:'Mystery'},{id:10749,n:'Romance'},{id:878,n:'Sci-Fi'},{id:53,n:'Thriller'}],
   tv:[{id:'',n:'All'},{id:10759,n:'Action'},{id:16,n:'Animation'},{id:35,n:'Comedy'},{id:80,n:'Crime'},{id:18,n:'Drama'},{id:10765,n:'Sci-Fi'},{id:9648,n:'Mystery'},{id:10768,n:'War'},{id:10762,n:'Kids'}]
 };
 
 // ROUTER
-function go(name,type){
-  const was=document.querySelector('.page.on')?.id.replace('-page','');
-  if(was==='player'&&name!=='player')dplayer();
+function go(name, type) {
+  const was = document.querySelector('.page.on')?.id.replace('-page','');
+  if (was==='player' && name!=='player') dplayer();
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('on'));
   document.getElementById(name+'-page').classList.add('on');
   window.scrollTo(0,0);
-  if(name==='home'){if(!hldd)lhome()}
-  if(name==='browse'){prevP=was||'home';if(type)cType=type;lbrowse()}
-  if(name==='search'){prevP=was||'home';setTimeout(()=>document.getElementById('si').focus(),80)}
-  if(name==='player')prevP=was||'home';
-  if(name==='profile')rprofile();
-  if(name==='settings'){lsettings();rsetacct()}
+  document.querySelectorAll('.nl a').forEach(a=>a.classList.remove('on'));
+  const navMap = {home:'nla', search:'nld'};
+  if (name==='browse' && type==='tv') document.getElementById('nlc').classList.add('on');
+  else if (name==='browse') document.getElementById('nlb').classList.add('on');
+  else if (navMap[name]) document.getElementById(navMap[name]).classList.add('on');
+  if (name==='home') { if(!hldd) lhome(); }
+  if (name==='browse') { prevP=was||'home'; if(type) cType=type; lbrowse(); }
+  if (name==='search') { prevP=was||'home'; setTimeout(()=>document.getElementById('si').focus(),80); }
+  if (name==='player') prevP=was||'home';
+  if (name==='profile') rprofile();
+  if (name==='settings') { lsettings(); rsetacct(); }
 }
-function hl(el){document.querySelectorAll('.nl a').forEach(a=>a.classList.remove('on'));el.classList.add('on')}
-function goback(){go(prevP)}
+function goback() { go(prevP); }
+
+// WIRE UP ALL BUTTONS (no onclick attributes — all addEventListener)
+document.getElementById('navlogo').addEventListener('click', ()=>go('home'));
+document.getElementById('nla').addEventListener('click', ()=>go('home'));
+document.getElementById('nlb').addEventListener('click', ()=>go('browse','movie'));
+document.getElementById('nlc').addEventListener('click', ()=>go('browse','tv'));
+document.getElementById('nld').addEventListener('click', ()=>go('search'));
+document.getElementById('nbset').addEventListener('click', ()=>go('settings'));
+document.getElementById('backbtn').addEventListener('click', goback);
+document.getElementById('hbrowsemov').addEventListener('click', ()=>go('browse','movie'));
+document.getElementById('hbrowsetv').addEventListener('click', ()=>go('browse','tv'));
+document.getElementById('hbsearch').addEventListener('click', ()=>go('search'));
+document.getElementById('seeallmov').addEventListener('click', ()=>go('browse','movie'));
+document.getElementById('seealltv').addEventListener('click', ()=>go('browse','tv'));
+document.getElementById('lmb').addEventListener('click', ()=>{ cPage++; fbrowse(false); });
+document.getElementById('ttm').addEventListener('click', ()=>{ cType='movie'; lbrowse(); });
+document.getElementById('ttt').addEventListener('click', ()=>{ cType='tv'; lbrowse(); });
+document.getElementById('prsignin').addEventListener('click', ()=>openM('login'));
+document.getElementById('prsignout').addEventListener('click', logout);
+document.getElementById('clrbtn').addEventListener('click', clrhist);
+document.getElementById('setSignin').addEventListener('click', ()=>openM('login'));
+document.getElementById('setClrHist').addEventListener('click', clrhist);
+[0,1,2,3].forEach(i => {
+  document.getElementById('sb'+i).addEventListener('click', ()=>{
+    cSrv=i;
+    [0,1,2,3].forEach(j=>document.getElementById('sb'+j).className='srbtn'+(j===i?' on':''));
+    lsrc();
+  });
+});
+document.getElementById('nsi').addEventListener('keydown', e=>{
+  if(e.key==='Enter'){ const v=e.target.value.trim(); if(!v) return; go('search'); document.getElementById('si').value=v; dosearch(v); }
+});
+document.getElementById('si').addEventListener('input', e=>dsearch(e.target.value));
+document.getElementById('si').addEventListener('keydown', e=>{ if(e.key==='Enter') dosearch(e.target.value); });
+document.getElementById('srchbtn').addEventListener('click', ()=>dosearch(document.getElementById('si').value));
+document.getElementById('amod').addEventListener('click', e=>{ if(e.target===document.getElementById('amod')) closeM(); });
+document.getElementById('mcloseBtn').addEventListener('click', closeM);
+document.getElementById('mta').addEventListener('click', ()=>switchT('login'));
+document.getElementById('mtb').addEventListener('click', ()=>switchT('reg'));
+document.getElementById('dologinBtn').addEventListener('click', dologin);
+document.getElementById('doregBtn').addEventListener('click', doreg);
+document.getElementById('guestBtn').addEventListener('click', closeM);
+document.getElementById('guestBtn2').addEventListener('click', closeM);
+document.getElementById('lp').addEventListener('keydown', e=>{ if(e.key==='Enter') dologin(); });
+document.getElementById('rp').addEventListener('keydown', e=>{ if(e.key==='Enter') doreg(); });
 
 // NAV USER
-function rnav(){
+function rnav() {
   const a=document.getElementById('navu');
-  if(CU){const i=CU.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();a.innerHTML=`<div class="nava" onclick="go('profile')" title="${CU.name}">${i}</div>`}
-  else a.innerHTML=`<button class="btn btn-p btn-sm" onclick="openM('login')">Sign in</button>`;
+  if (CU) {
+    const i=CU.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    a.innerHTML=`<div class="nava" title="${CU.name}">${i}</div>`;
+    a.querySelector('.nava').addEventListener('click',()=>go('profile'));
+  } else {
+    a.innerHTML=`<button class="btn btn-p btn-sm">Sign in</button>`;
+    a.querySelector('button').addEventListener('click',()=>openM('login'));
+  }
 }
-function rsetacct(){
-  const r=document.getElementById('setacct');if(!r)return;
-  if(CU)r.innerHTML=`<div><div class="setl">${CU.name}</div><div class="setd">${CU.email}</div></div><button class="btn btn-g btn-sm" onclick="logout()">Sign out</button>`;
-  else r.innerHTML=`<div><div class="setl">Not signed in</div><div class="setd">Sign in to sync history</div></div><button class="btn btn-p btn-sm" onclick="openM('login')">Sign in</button>`;
+function rsetacct() {
+  const r=document.getElementById('setacct'); if(!r) return;
+  if (CU) {
+    r.innerHTML=`<div><div class="setl">${CU.name}</div><div class="setd">${CU.email}</div></div><button class="btn btn-g btn-sm">Sign out</button>`;
+    r.querySelector('button').addEventListener('click', logout);
+  } else {
+    r.innerHTML=`<div><div class="setl">Not signed in</div><div class="setd">Sign in to sync history</div></div><button class="btn btn-p btn-sm">Sign in</button>`;
+    r.querySelector('button').addEventListener('click',()=>openM('login'));
+  }
 }
 
 // PROFILE
-function rprofile(){
-  const h=gH(),mv=h.filter(x=>x.type==='movie').length,tv=h.filter(x=>x.type==='tv').length;
+function rprofile() {
+  const h=gH(), mv=h.filter(x=>x.type==='movie').length, tv=h.filter(x=>x.type==='tv').length;
   document.getElementById('sttot').textContent=h.length;
   document.getElementById('stmov').textContent=mv;
   document.getElementById('sttv').textContent=tv;
-  const cb=document.getElementById('clrbtn');if(cb)cb.style.display=h.length?'inline-flex':'none';
-  if(CU){
+  const cb=document.getElementById('clrbtn'); if(cb) cb.style.display=h.length?'inline-flex':'none';
+  if (CU) {
     const i=CU.name.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
     document.getElementById('pavbig').textContent=i;
     document.getElementById('pname').textContent=CU.name;
     document.getElementById('pemail').textContent=CU.email;
     document.getElementById('prsignin').style.display='none';
     document.getElementById('prsignout').style.display='';
-  }else{
+  } else {
     document.getElementById('pavbig').textContent='?';
     document.getElementById('pname').textContent='Guest';
     document.getElementById('pemail').textContent='Not signed in';
@@ -645,161 +775,202 @@ function rprofile(){
     document.getElementById('prsignout').style.display='none';
   }
   const list=document.getElementById('hlist');
-  if(!h.length){list.innerHTML=`<div class="empty"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg><p>No watch history yet.<br>Start watching something!</p></div>`;return}
+  if (!h.length) {
+    list.innerHTML=`<div class="empty"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg><p>No watch history yet.<br>Start watching something!</p></div>`;
+    return;
+  }
   list.innerHTML='';
   h.forEach(item=>{
-    const el=document.createElement('div');el.className='hitem';
-    el.onclick=ev=>{if(!ev.target.closest('.hrm'))opfromh(item)};
+    const el=document.createElement('div'); el.className='hitem';
     const th=item.poster?`<img class="hthumb" src="${IW}${item.poster}" alt="" loading="lazy">`:`<div class="hthph"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/></svg></div>`;
-    el.innerHTML=`${th}<div class="hinfo"><div class="htitle">${item.title}</div><div class="hsub">${item.type==='tv'?'TV Series':'Movie'} · ${ago(item.date)}</div></div><button class="hrm" onclick="rmH(${item.id},'${item.type}')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg></button>`;
+    el.innerHTML=`${th}<div class="hinfo"><div class="htitle">${item.title}</div><div class="hsub">${item.type==='tv'?'TV Series':'Movie'} · ${ago(item.date)}</div></div><button class="hrm"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg></button>`;
+    el.querySelector('.hrm').addEventListener('click', ev=>{ ev.stopPropagation(); rmH(item.id,item.type); });
+    el.addEventListener('click', ()=>opfromh(item));
     list.appendChild(el);
   });
 }
-function ago(ts){const s=(Date.now()-ts)/1000;if(s<60)return'just now';if(s<3600)return Math.floor(s/60)+'m ago';if(s<86400)return Math.floor(s/3600)+'h ago';return Math.floor(s/86400)+'d ago'}
+function ago(ts) { const s=(Date.now()-ts)/1000; if(s<60) return'just now'; if(s<3600) return Math.floor(s/60)+'m ago'; if(s<86400) return Math.floor(s/3600)+'h ago'; return Math.floor(s/86400)+'d ago'; }
 
 // CONTINUE WATCHING
-function rcont(){
-  const h=gH().slice(0,8),sec=document.getElementById('contsec'),g=document.getElementById('contg');
-  if(!h.length){sec.style.display='none';return}
-  sec.style.display='block';g.innerHTML='';
+function rcont() {
+  const h=gH().slice(0,8), sec=document.getElementById('contsec'), g=document.getElementById('contg');
+  if (!h.length) { sec.style.display='none'; return; }
+  sec.style.display='block'; g.innerHTML='';
   h.forEach(item=>{
-    const el=document.createElement('div');el.className='card';el.onclick=()=>opfromh(item);
+    const el=document.createElement('div'); el.className='card';
     const im=item.poster?`<div class="pw ok"><img class="poster vis" src="${IW}${item.poster}" alt="" loading="lazy"></div>`:`<div class="pw ok"><div class="pph"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect width="18" height="18" x="3" y="3" rx="2"/></svg></div></div>`;
     el.innerHTML=`${im}<div class="cplay"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div><span class="cbadge">${item.type==='tv'?'TV':'Film'}</span><div class="cwb"></div><div class="ci"><div class="ct">${item.title}</div><div class="cs">Continue watching</div></div>`;
+    el.addEventListener('click',()=>opfromh(item));
     g.appendChild(el);
   });
 }
-function opfromh(item){openP({id:item.id,title:item.title,name:item.title,poster_path:item.poster,vote_average:0,overview:''},item.type)}
+function opfromh(item) { openP({id:item.id,title:item.title,name:item.title,poster_path:item.poster,vote_average:0,overview:''},item.type); }
 
 // HOME
-async function lhome(){
-  hldd=true;rcont();
-  const hm=document.getElementById('hm'),ht=document.getElementById('ht');
-  skel(hm,10);skel(ht,10);
-  const[mv,tv]=await Promise.all([api(`${API}/trending/movie/week?api_key=${KEY}&language=en-US`),api(`${API}/trending/tv/week?api_key=${KEY}&language=en-US`)]);
-  rgrid(hm,mv.results||[],'movie');rgrid(ht,tv.results||[],'tv');
+async function lhome() {
+  hldd=true; rcont();
+  const hm=document.getElementById('hm'), ht=document.getElementById('ht');
+  skel(hm,10); skel(ht,10);
+  const [mv,tv]=await Promise.all([
+    api(`${API}/trending/movie/week?api_key=${KEY}&language=en-US`),
+    api(`${API}/trending/tv/week?api_key=${KEY}&language=en-US`)
+  ]);
+  rgrid(hm,mv.results||[],'movie'); rgrid(ht,tv.results||[],'tv');
   const picks=(mv.results||[]).filter(m=>m.backdrop_path);
-  if(picks.length)setHero(picks[0|Math.random()*Math.min(picks.length,5)],'movie');
+  if (picks.length) setHero(picks[0|Math.random()*Math.min(picks.length,5)],'movie');
 }
 
-function setHero(item,type){
-  const hc=document.getElementById('hc'),hbi=document.getElementById('hbi');
-  const title=item.title||item.name||'',year=(item.release_date||item.first_air_date||'').slice(0,4),rat=item.vote_average?item.vote_average.toFixed(1):'';
-  if(item.backdrop_path){hbi.style.backgroundImage=`url(${IB}${item.backdrop_path})`;const i=new Image();i.onload=()=>hbi.classList.add('on');i.src=`${IB}${item.backdrop_path}`}
-  // Encode item safely for onclick
-  const enc=encodeURIComponent(JSON.stringify(item));
-  hc.innerHTML=`<div class="hbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>${type==='tv'?'Trending TV':'Trending Now'}</div>
-  ${rat?`<div class="hrating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>${rat}</div>`:''}
-  <h1>${title}</h1>
-  <p>${(item.overview||'').slice(0,160)}${(item.overview||'').length>160?'…':''}</p>
-  <div class="hbtns">
-    <button class="btn btn-p" onclick="openP(JSON.parse(decodeURIComponent('${enc}')),'${type}')"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>Watch Now</button>
-    <button class="btn btn-g" onclick="go('browse','${type}')">Browse ${type==='tv'?'Shows':'Movies'}</button>
-  </div>`;
+function setHero(item,type) {
+  const hc=document.getElementById('hc'), hbi=document.getElementById('hbi');
+  const title=item.title||item.name||'', rat=item.vote_average?item.vote_average.toFixed(1):'';
+  if (item.backdrop_path) {
+    hbi.style.backgroundImage=`url(${IB}${item.backdrop_path})`;
+    const img=new Image(); img.onload=()=>hbi.classList.add('on'); img.src=`${IB}${item.backdrop_path}`;
+  }
+  hc.innerHTML=`
+    <div class="hbadge"><svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>${type==='tv'?'Trending TV':'Trending Now'}</div>
+    ${rat?`<div class="hrating"><svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>${rat}</div>`:''}
+    <h1>${title}</h1>
+    <p>${(item.overview||'').slice(0,160)}${(item.overview||'').length>160?'…':''}</p>
+    <div class="hbtns">
+      <button class="btn btn-p" id="heroplay"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="5,3 19,12 5,21"/></svg>Watch Now</button>
+      <button class="btn btn-g" id="herobrowse">Browse ${type==='tv'?'Shows':'Movies'}</button>
+    </div>`;
+  document.getElementById('heroplay').addEventListener('click',()=>openP(item,type));
+  document.getElementById('herobrowse').addEventListener('click',()=>go('browse',type));
 }
 
 // BROWSE
-function lbrowse(){cPage=1;cGenre='';document.getElementById('brh').textContent=cType==='movie'?'Movies':'TV Shows';document.getElementById('ttm').className='ttab'+(cType==='movie'?' on':'');document.getElementById('ttt').className='ttab'+(cType==='tv'?' on':'');rpills();fbrowse(true)}
-function rpills(){const w=document.getElementById('gpills');w.innerHTML='';GENRES[cType].forEach(g=>{const p=document.createElement('div');p.className='pill'+(g.id===cGenre?' on':'');p.textContent=g.n;p.onclick=()=>{cGenre=g.id;cPage=1;document.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));p.classList.add('on');fbrowse(true)};w.appendChild(p)})}
-async function fbrowse(reset){
-  const g=document.getElementById('brgrid');if(reset)skel(g,12);
-  const ep=cType==='movie'?'discover/movie':'discover/tv',gp=cGenre?`&with_genres=${cGenre}`:'';
+function lbrowse() {
+  cPage=1; cGenre='';
+  document.getElementById('brh').textContent=cType==='movie'?'Movies':'TV Shows';
+  document.getElementById('ttm').className='ttab'+(cType==='movie'?' on':'');
+  document.getElementById('ttt').className='ttab'+(cType==='tv'?' on':'');
+  rpills(); fbrowse(true);
+}
+function rpills() {
+  const w=document.getElementById('gpills'); w.innerHTML='';
+  GENRES[cType].forEach(g=>{
+    const p=document.createElement('div');
+    p.className='pill'+(g.id===cGenre?' on':''); p.textContent=g.n;
+    p.addEventListener('click',()=>{
+      cGenre=g.id; cPage=1;
+      document.querySelectorAll('.pill').forEach(x=>x.classList.remove('on'));
+      p.classList.add('on'); fbrowse(true);
+    });
+    w.appendChild(p);
+  });
+}
+async function fbrowse(reset) {
+  const g=document.getElementById('brgrid'); if(reset) skel(g,12);
+  const ep=cType==='movie'?'discover/movie':'discover/tv', gp=cGenre?`&with_genres=${cGenre}`:'';
   const d=await api(`${API}/${ep}?api_key=${KEY}&language=en-US&sort_by=popularity.desc&page=${cPage}${gp}&vote_count.gte=20`);
-  if(reset)g.innerHTML='';
+  if(reset) g.innerHTML='';
   (d.results||[]).forEach(i=>g.appendChild(mcard(i,cType)));
   document.getElementById('lmb').style.display=(d.page<d.total_pages)?'inline-flex':'none';
 }
-function stype(t){cType=t;lbrowse()}
-function lmore(){cPage++;fbrowse(false)}
 
-// PLAYER — FIX: no sandbox, allow-scripts removed intentionally
-function dplayer(){document.getElementById('pif').innerHTML=''}
-async function openP(item,type){
-  cItem=item;cMT=type;cS=1;cEp=1;cSrv=parseInt(gS('server','0'));
-  go('player');addH(item,type);lsrc();
-  const title=item.title||item.name||'',year=(item.release_date||item.first_air_date||'').slice(0,4),rat=item.vote_average?item.vote_average.toFixed(1):'–';
+// PLAYER
+function dplayer() { document.getElementById('pif').innerHTML=''; }
+async function openP(item,type) {
+  cItem=item; cMT=type; cS=1; cEp=1; cSrv=parseInt(gS('server','0'));
+  go('player'); addH(item,type); lsrc();
+  const title=item.title||item.name||'', year=(item.release_date||item.first_air_date||'').slice(0,4), rat=item.vote_average?item.vote_average.toFixed(1):'–';
   document.getElementById('pt').textContent=title;
   document.getElementById('pm').innerHTML=`<span class="star">★ ${rat}</span><span class="mdot">·</span>${year?`<span>${year}</span><span class="mdot">·</span>`:''}<span>${type==='movie'?'Movie':'TV Series'}</span>`;
   document.getElementById('po').textContent=item.overview||'';
-  document.getElementById('pa').innerHTML=`<button class="btn btn-g btn-sm" onclick="rmH(${item.id},'${type}')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>Mark watched</button>`;
-  for(let i=0;i<4;i++)document.getElementById('sb'+i).className='srbtn'+(i===cSrv?' on':'');
-  if(type==='tv')lepsel(item);else document.getElementById('epwrap').innerHTML='';
+  const pa=document.getElementById('pa');
+  pa.innerHTML=`<button class="btn btn-g btn-sm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>Mark watched</button>`;
+  pa.querySelector('button').addEventListener('click',()=>rmH(item.id,type));
+  [0,1,2,3].forEach(i=>document.getElementById('sb'+i).className='srbtn'+(i===cSrv?' on':''));
+  if (type==='tv') lepsel(item); else document.getElementById('epwrap').innerHTML='';
 }
-function lsrc(){
-  const slot=document.getElementById('pif'),ldr=document.getElementById('pl');
-  slot.innerHTML='';ldr.style.display='flex';
+function lsrc() {
+  const slot=document.getElementById('pif'), ldr=document.getElementById('pl');
+  slot.innerHTML=''; ldr.style.display='flex';
   const iframe=document.createElement('iframe');
-  // CRITICAL FIX: no sandbox attribute — was blocking embed players from working
   iframe.setAttribute('allowfullscreen','');
   iframe.setAttribute('allow','fullscreen; autoplay; encrypted-media; picture-in-picture');
   iframe.setAttribute('referrerpolicy','no-referrer-when-downgrade');
   iframe.style.cssText='width:100%;height:100%;border:none;display:block;opacity:0;transition:opacity .3s;position:absolute;inset:0;z-index:1';
-  const show=()=>{ldr.style.display='none';iframe.style.opacity='1'};
-  iframe.onload=show;setTimeout(show,5000);
+  const show=()=>{ ldr.style.display='none'; iframe.style.opacity='1'; };
+  iframe.onload=()=>{ show(); try{if(iframe.contentWindow) iframe.contentWindow.open=()=>null;}catch(_){} };
+  setTimeout(show,5000);
   slot.style.cssText='width:100%;height:100%;position:relative';
   slot.appendChild(iframe);
   iframe.src=eurl(cItem,cMT,cSrv,cS,cEp);
 }
-function ssrv(i){cSrv=i;for(let j=0;j<4;j++)document.getElementById('sb'+j).className='srbtn'+(j===i?' on':'');lsrc()}
 
-// EPISODES — Cineby-style cards with stills
-async function lepsel(item){
+// EPISODES
+async function lepsel(item) {
   const w=document.getElementById('epwrap');
   w.innerHTML=`<div class="epsec"><p style="color:var(--text3);font-size:.8rem">Loading episodes…</p></div>`;
   const d=await api(`${API}/tv/${item.id}?api_key=${KEY}&language=en-US`);
   const ns=d.number_of_seasons||1;
-  let tabs='';for(let i=1;i<=ns;i++)tabs+=`<button class="stab${i===1?' on':''}" id="stab${i}" onclick="chs(${item.id},${i})">${ns>10?`S${i}`:`Season ${i}`}</button>`;
+  let tabs=''; for(let i=1;i<=ns;i++) tabs+=`<button class="stab${i===1?' on':''}" data-s="${i}">${ns>10?`S${i}`:`Season ${i}`}</button>`;
   w.innerHTML=`<div class="epsec"><div class="epsect"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 8h10M9 12h10M9 16h10M4.02 8h.02M4.02 12h.02M4.02 16h.02"/></svg>Episodes</div><div class="stabs" id="stabs">${tabs}</div><div id="eplist"></div></div>`;
+  document.querySelectorAll('.stab').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const s=parseInt(btn.dataset.s); cS=s; cEp=1;
+      document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+      btn.classList.add('on'); lsrc(); leps(item.id,s);
+    });
+  });
   leps(item.id,1);
 }
-async function chs(id,s){
-  cS=parseInt(s);cEp=1;
-  document.querySelectorAll('.stab').forEach((t,i)=>t.classList.toggle('on',i+1===parseInt(s)));
-  lsrc();leps(id,s);
-}
-async function leps(id,s){
-  const list=document.getElementById('eplist');if(!list)return;
+async function leps(id,s) {
+  const list=document.getElementById('eplist'); if(!list) return;
   list.innerHTML=`<div class="epscroll">${Array(6).fill(0).map(()=>`<div class="skel" style="width:224px;flex-shrink:0"><div class="skel-img" style="aspect-ratio:16/9"></div><div class="skel-b"></div><div class="skel-b2"></div></div>`).join('')}</div>`;
   const d=await api(`${API}/tv/${id}/season/${s}?api_key=${KEY}&language=en-US`);
   const eps=d.episodes||[];
-  if(!eps.length){list.innerHTML='<p style="color:var(--text3);font-size:.8rem;padding:.5rem 0">No episodes found.</p>';return}
-  if(eps.length>30){
-    list.innerHTML=`<div class="epgrid">${eps.map(ep=>`<button class="epbtn${ep.episode_number===cEp?' on':''}" id="eb${ep.episode_number}" onclick="selep(${ep.episode_number},this)" title="${ep.name||''}">E${ep.episode_number}</button>`).join('')}</div>`;
+  if (!eps.length) { list.innerHTML='<p style="color:var(--text3);font-size:.8rem;padding:.5rem 0">No episodes found.</p>'; return; }
+  if (eps.length>30) {
+    list.innerHTML=`<div class="epgrid">${eps.map(ep=>`<button class="epbtn${ep.episode_number===cEp?' on':''}" data-ep="${ep.episode_number}">E${ep.episode_number}</button>`).join('')}</div>`;
+    list.querySelectorAll('.epbtn').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.epbtn').forEach(b=>b.classList.remove('on'));
+        btn.classList.add('on'); cEp=parseInt(btn.dataset.ep); lsrc();
+      });
+    });
     return;
   }
-  const scroll=document.createElement('div');scroll.className='epscroll';
+  const scroll=document.createElement('div'); scroll.className='epscroll';
   eps.forEach(ep=>{
     const card=document.createElement('div');
     card.className='epcard'+(ep.episode_number===cEp?' on':'');
-    card.id='epc'+ep.episode_number;
     const still=ep.still_path?`<img src="${IE}${ep.still_path}" alt="" loading="lazy" onload="this.classList.add('vis')">`:`<div class="epthph"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5,3 19,12 5,21"/></svg></div>`;
     card.innerHTML=`<div class="epthumb">${still}<div class="epplay"><div class="epplayi"><svg width="11" height="11" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div></div></div><div class="epinfo"><div class="epnum">Episode ${ep.episode_number}${ep.runtime?` · ${ep.runtime}m`:''}</div><div class="epname">${ep.name||'Episode '+ep.episode_number}</div><div class="epovr">${ep.overview||'No description available.'}</div></div>`;
-    card.onclick=()=>{document.querySelectorAll('.epcard').forEach(c=>c.classList.remove('on'));card.classList.add('on');cEp=ep.episode_number;lsrc()};
+    card.addEventListener('click',()=>{
+      document.querySelectorAll('.epcard').forEach(c=>c.classList.remove('on'));
+      card.classList.add('on'); cEp=ep.episode_number; lsrc();
+    });
     scroll.appendChild(card);
   });
-  list.innerHTML='';list.appendChild(scroll);
-  setTimeout(()=>{const a=list.querySelector('.epcard.on');if(a)a.scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'})},100);
+  list.innerHTML=''; list.appendChild(scroll);
+  setTimeout(()=>{ const a=list.querySelector('.epcard.on'); if(a) a.scrollIntoView({behavior:'smooth',block:'nearest',inline:'start'}); },100);
 }
-function selep(n,btn){document.querySelectorAll('.epbtn').forEach(b=>b.classList.remove('on'));btn.classList.add('on');cEp=n;lsrc()}
 
 // SEARCH
-function dsearch(v){clearTimeout(stmr);if(!v.trim()){document.getElementById('sg').innerHTML='';document.getElementById('sinf').textContent='Start typing to search…';return}stmr=setTimeout(()=>dosearch(v),320)}
-async function dosearch(v){
-  if(!v.trim())return;
+function dsearch(v) {
+  clearTimeout(stmr);
+  if (!v.trim()) { document.getElementById('sg').innerHTML=''; document.getElementById('sinf').textContent='Start typing to search…'; return; }
+  stmr=setTimeout(()=>dosearch(v),320);
+}
+async function dosearch(v) {
+  if (!v.trim()) return;
   document.getElementById('sinf').textContent=`Searching for "${v}"…`;
   skel(document.getElementById('sg'),8);
   const d=await api(`${API}/search/multi?api_key=${KEY}&language=en-US&query=${encodeURIComponent(v)}&page=1`);
   const res=(d.results||[]).filter(r=>r.media_type==='movie'||r.media_type==='tv');
   document.getElementById('sinf').textContent=res.length?`${res.length} results for "${v}"`:`No results for "${v}"`;
-  const g=document.getElementById('sg');g.innerHTML='';
+  const g=document.getElementById('sg'); g.innerHTML='';
   res.forEach(i=>g.appendChild(mcard(i,i.media_type)));
 }
-function qsearch(){const v=document.getElementById('nsi').value;if(!v.trim())return;go('search');hl(document.getElementById('nld'));document.getElementById('si').value=v;dosearch(v)}
 
 // MODAL
-function openM(tab='login'){document.getElementById('amod').classList.add('on');switchT(tab)}
-function closeM(){document.getElementById('amod').classList.remove('on')}
-function switchT(t){
+function openM(tab='login') { document.getElementById('amod').classList.add('on'); switchT(tab); }
+function closeM() { document.getElementById('amod').classList.remove('on'); }
+function switchT(t) {
   document.getElementById('lf').style.display=t==='login'?'block':'none';
   document.getElementById('rf').style.display=t==='reg'?'block':'none';
   document.getElementById('mta').className='mtab'+(t==='login'?' on':'');
@@ -809,32 +980,35 @@ function switchT(t){
 }
 
 // SKELETON
-function skel(el,n=12){el.innerHTML=Array(n).fill(0).map(()=>`<div class="skel"><div class="skel-img"></div><div class="skel-b"></div><div class="skel-b2"></div></div>`).join('')}
+function skel(el,n=12) { el.innerHTML=Array(n).fill(0).map(()=>`<div class="skel"><div class="skel-img"></div><div class="skel-b"></div><div class="skel-b2"></div></div>`).join(''); }
 
 // CARD
-function mcard(item,type){
-  const t=type||item.media_type||'movie',title=item.title||item.name||'Untitled',year=(item.release_date||item.first_air_date||'').slice(0,4),rat=item.vote_average?item.vote_average.toFixed(1):'–',watched=gH().some(x=>x.id===item.id&&x.type===t);
-  const el=document.createElement('div');el.className='card';el.onclick=()=>openP(item,t);
+function mcard(item,type) {
+  const t=type||item.media_type||'movie', title=item.title||item.name||'Untitled';
+  const year=(item.release_date||item.first_air_date||'').slice(0,4), rat=item.vote_average?item.vote_average.toFixed(1):'–';
+  const watched=gH().some(x=>x.id===item.id&&x.type===t);
+  const el=document.createElement('div'); el.className='card';
   const play=`<div class="cplay"><svg width="12" height="12" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>`;
   const badge=`<span class="cbadge">${t==='tv'?'TV':'Film'}</span>`;
   const wb=watched?`<div class="cwb"></div>`:'';
   const info=`<div class="ci"><div class="ct">${title}</div><div class="cs"><span class="cstar">★</span> ${rat}${year?` · ${year}`:''}</div></div>`;
-  if(item.poster_path){el.innerHTML=`<div class="pw" data-src="${IW}${item.poster_path}"><div class="psh"></div><img class="poster" alt="${title.replace(/"/g,"'")}"></div>${play}${badge}${wb}${info}`;iobs.observe(el.querySelector('.pw'))}
-  else el.innerHTML=`<div class="pw ok"><div class="pph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect width="18" height="18" x="3" y="3" rx="2"/></svg></div></div>${play}${badge}${wb}${info}`;
+  if (item.poster_path) {
+    el.innerHTML=`<div class="pw" data-src="${IW}${item.poster_path}"><div class="psh"></div><img class="poster" alt="${title.replace(/"/g,"'")}"></div>${play}${badge}${wb}${info}`;
+    iobs.observe(el.querySelector('.pw'));
+  } else {
+    el.innerHTML=`<div class="pw ok"><div class="pph"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect width="18" height="18" x="3" y="3" rx="2"/></svg></div></div>${play}${badge}${wb}${info}`;
+  }
+  el.addEventListener('click',()=>openP(item,t));
   return el;
 }
-function rgrid(el,items,type){
+function rgrid(el,items,type) {
   el.innerHTML='';
-  if(!items?.length){el.innerHTML='<div style="color:var(--text3);padding:3rem 0;text-align:center;grid-column:1/-1;font-size:.88rem">Nothing found</div>';return}
+  if (!items?.length) { el.innerHTML='<div style="color:var(--text3);padding:3rem 0;text-align:center;grid-column:1/-1;font-size:.88rem">Nothing found</div>'; return; }
   items.forEach(i=>el.appendChild(mcard(i,type)));
 }
 
-// AD BLOCK
-window.open=()=>null;
-window.addEventListener('message',e=>{if(typeof e.data==='string'){try{const d=JSON.parse(e.data);if(d.type==='navigate'||d.action==='redirect')e.stopImmediatePropagation()}catch(_){}}});
-
 // BOOT
-rnav();lhome();
+rnav(); lhome();
 </script>
 </body>
 </html>
