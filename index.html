@@ -53,14 +53,24 @@ div[class*="banner-ad"],div[id*="banner-ad"] {
 }
 
 /* LOADING SCREEN */
-#loadscreen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.4rem;transition:opacity .5s ease}
+#loadscreen{position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.5rem;transition:opacity .7s cubic-bezier(.4,0,.2,1);overflow:hidden}
 #loadscreen.hide{opacity:0;pointer-events:none}
-.ls-logo{font-size:2.4rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,#fff 30%,var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ls-glow{position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(157,124,255,.12) 0%,transparent 70%);animation:lspulse 2.4s ease-in-out infinite;pointer-events:none}
+@keyframes lspulse{0%,100%{transform:scale(.9);opacity:.6}50%{transform:scale(1.1);opacity:1}}
+.ls-logo{font-size:2.6rem;font-weight:800;letter-spacing:-.5px;background:linear-gradient(135deg,#fff 30%,var(--acc));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1}
 .ls-logo em{-webkit-text-fill-color:var(--acc);font-style:normal}
-.ls-count{font-size:3rem;font-weight:800;color:var(--acc);letter-spacing:-.5px;font-variant-numeric:tabular-nums;min-width:5ch;text-align:center}
-.ls-bar-wrap{width:240px;height:4px;background:var(--bg3);border-radius:99px;overflow:hidden}
-.ls-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:99px;transition:width .08s linear}
-.ls-txt{font-size:.75rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase}
+.ls-spinner{position:relative;width:64px;height:64px;z-index:1}
+.ls-spinner::before,.ls-spinner::after{content:'';position:absolute;border-radius:50%;border:3px solid transparent}
+.ls-spinner::before{inset:0;border-top-color:var(--acc);border-right-color:var(--acc);animation:lspin 1s linear infinite}
+.ls-spinner::after{inset:10px;border-bottom-color:var(--acc2);border-left-color:var(--acc2);animation:lspin .7s linear infinite reverse}
+@keyframes lspin{to{transform:rotate(360deg)}}
+.ls-count{font-size:3rem;font-weight:800;color:var(--acc);letter-spacing:-.5px;font-variant-numeric:tabular-nums;min-width:5ch;text-align:center;text-shadow:0 0 30px rgba(157,124,255,.5);z-index:1}
+.ls-bar-wrap{width:260px;height:3px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden;z-index:1}
+.ls-bar{height:100%;width:0%;background:linear-gradient(90deg,var(--acc2),var(--acc),#c8acff);border-radius:99px;transition:width .07s linear;box-shadow:0 0 12px rgba(157,124,255,.6)}
+.ls-txt{font-size:.7rem;color:var(--text3);letter-spacing:.14em;text-transform:uppercase;z-index:1}
+.ls-dots{display:flex;gap:5px;z-index:1}
+.ls-dot{width:5px;height:5px;border-radius:50%;background:var(--bg4);transition:background .25s,transform .25s}
+.ls-dot.on{background:var(--acc);transform:scale(1.35)}
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:flex;align-items:center;padding:0 1.5rem;gap:1.25rem;background:rgba(7,7,14,.93);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--bd)}
@@ -284,10 +294,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;height:var(--nav);display:fl
 
 <!-- LOADING SCREEN -->
 <div id="loadscreen">
+  <div class="ls-glow"></div>
   <div class="ls-logo">Flix<em>Free</em></div>
+  <div class="ls-spinner"></div>
   <div class="ls-count" id="lscount">0%</div>
   <div class="ls-bar-wrap"><div class="ls-bar" id="lsbar"></div></div>
-  <div class="ls-txt">Loading your stream…</div>
+  <div class="ls-dots"><div class="ls-dot" id="lsd0"></div><div class="ls-dot" id="lsd1"></div><div class="ls-dot" id="lsd2"></div><div class="ls-dot" id="lsd3"></div></div>
+  <div class="ls-txt" id="lstxt">Connecting to servers…</div>
 </div>
 
 <nav>
@@ -604,28 +617,154 @@ window.addEventListener('message', e => {
   }
 }, true);
 
+
 // ═══════════════════════════════════════════════════════════
-//  COUNTING LOADING SCREEN
+//  LOADING SCREEN
 // ═══════════════════════════════════════════════════════════
 (function(){
-  const bar = document.getElementById('lsbar');
-  const count = document.getElementById('lscount');
+  const bar    = document.getElementById('lsbar');
+  const count  = document.getElementById('lscount');
   const screen = document.getElementById('loadscreen');
-  let p = 0;
+  const txt    = document.getElementById('lstxt');
+  const dots   = [0,1,2,3].map(i => document.getElementById('lsd'+i));
+  const msgs   = ['Connecting to servers…','Loading content…','Almost ready…','Finalizing…'];
+  let p = 0, dotIdx = 0;
+
+  const dotTick = setInterval(() => {
+    dots.forEach((d,i) => d.classList.toggle('on', i === dotIdx));
+    dotIdx = (dotIdx + 1) % dots.length;
+  }, 320);
+
   const tick = () => {
-    p += Math.random() * 7 + 3;
+    p += Math.random() * 6 + 3;
     if (p >= 100) {
       p = 100;
       bar.style.width = '100%';
       count.textContent = '100%';
-      setTimeout(() => { screen.classList.add('hide'); setTimeout(() => screen.remove(), 500); }, 250);
+      dots.forEach(d => d.classList.add('on'));
+      txt.textContent = 'Ready!';
+      clearInterval(dotTick);
+      setTimeout(() => {
+        screen.classList.add('hide');
+        setTimeout(() => screen.remove(), 700);
+      }, 300);
       return;
     }
     bar.style.width = p + '%';
     count.textContent = Math.floor(p) + '%';
-    setTimeout(tick, 60 + Math.random() * 60);
+    txt.textContent = msgs[Math.min(3, Math.floor(p / 26))];
+    setTimeout(tick, 55 + Math.random() * 65);
   };
   tick();
+})();
+
+// ═══════════════════════════════════════════════════════════
+//  POPUP BLOCKER SCRIPT — auto-runs, blocks everything
+// ═══════════════════════════════════════════════════════════
+(function(){
+  // 1. Kill all the window methods ads use
+  window.open    = () => null;
+  window.alert   = () => null;
+  window.confirm = () => false;
+  window.prompt  = () => null;
+
+  // 2. Override document.write so ad scripts can't inject HTML
+  document.write = () => null;
+  document.writeln = () => null;
+
+  // 3. Intercept all link clicks — if it would open a new tab/window, kill it
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href]');
+    if (a && (a.target === '_blank' || a.href.startsWith('javascript'))) {
+      const safe = a.closest('nav, .modal, .overlay');
+      if (!safe) { e.preventDefault(); e.stopImmediatePropagation(); }
+    }
+  }, true);
+
+  // 4. Watch for popup windows being created via setTimeout tricks
+  const _setTimeout = window.setTimeout;
+  window.setTimeout = function(fn, delay, ...args) {
+    if (typeof fn === 'string') return; // block eval-based popups
+    return _setTimeout(fn, delay, ...args);
+  };
+
+  // 5. Block any new elements injected outside .page/.modal with high z-index
+  //    Use a tight selector — only nuke things that look like ad overlays
+  const isAdOverlay = node => {
+    if (node.nodeType !== 1) return false;
+    const tag = node.tagName;
+    // Never touch our own UI
+    if (node.id === 'loadscreen' || node.closest?.('nav,.page,.modal,.overlay,#amod')) return false;
+    const s = window.getComputedStyle(node);
+    const z = parseInt(s.zIndex) || 0;
+    const pos = s.position;
+    // Ad overlays: fixed/absolute, high z-index, large area, not our elements
+    if ((pos === 'fixed' || pos === 'absolute') && z > 999) return true;
+    // Injected iframes outside the player slot
+    if (tag === 'IFRAME' && !node.closest('.pslot')) return true;
+    // Injected script tags pointing to ad domains
+    if (tag === 'SCRIPT') {
+      const src = node.src || '';
+      const adDomains = ['adsterra','popads','cloudnestra','exoclick','trafficjunky',
+        'adnxs','doubleclick','googlesyndication','hilltopads','propellerads',
+        'clickadu','richpush','pushcrew','realsrv','adspyglass','popunder'];
+      if (adDomains.some(d => src.includes(d))) return true;
+    }
+    return false;
+  };
+
+  new MutationObserver(muts => {
+    muts.forEach(m => m.addedNodes.forEach(node => {
+      if (isAdOverlay(node)) {
+        node.remove();
+      }
+    }));
+  }).observe(document.documentElement, { childList: true, subtree: true });
+
+  // 6. Block fetch/XHR to ad domains
+  const AD_DOMAINS = ['adsterra','popads','cloudnestra','exoclick','trafficjunky',
+    'adnxs','doubleclick','googlesyndication','hilltopads','propellerads',
+    'clickadu','richpush','pushcrew','realsrv','adspyglass','popunder'];
+
+  const _fetch = window.fetch;
+  window.fetch = (url, ...args) => {
+    if (typeof url === 'string' && AD_DOMAINS.some(d => url.includes(d)))
+      return Promise.reject(new Error('blocked'));
+    return _fetch(url, ...args);
+  };
+
+  const _xhrOpen = XMLHttpRequest.prototype.open;
+  XMLHttpRequest.prototype.open = function(m, url, ...args) {
+    if (typeof url === 'string' && AD_DOMAINS.some(d => url.includes(d))) {
+      this._blocked = true; return;
+    }
+    return _xhrOpen.call(this, m, url, ...args);
+  };
+  const _xhrSend = XMLHttpRequest.prototype.send;
+  XMLHttpRequest.prototype.send = function(...args) {
+    if (this._blocked) return;
+    return _xhrSend.apply(this, args);
+  };
+
+  // 7. Block postMessage redirects from iframes
+  window.addEventListener('message', e => {
+    if (typeof e.data === 'string') {
+      try {
+        const d = JSON.parse(e.data);
+        if (d.type === 'navigate' || d.action === 'redirect' || d.url)
+          e.stopImmediatePropagation();
+      } catch(_) {}
+    }
+  }, true);
+
+  // 8. Prevent page navigation caused by clicking inside iframes
+  //    by blocking beforeunload when it fires unexpectedly
+  let _navAllowed = false;
+  window.addEventListener('beforeunload', e => {
+    if (!_navAllowed) e.preventDefault();
+  });
+  // Allow legit navigation (like page reload)
+  window._allowNav = () => { _navAllowed = true; };
 })();
 
 // ═══════════════════════════════════════════════════════════
